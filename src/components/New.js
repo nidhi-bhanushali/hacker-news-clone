@@ -2,7 +2,7 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import React , { useState , useEffect} from 'react'
 import NewArticles from './NewArticles';
-import Top from './Top';
+// import Top from './Top';
 
 
 const New = () => {
