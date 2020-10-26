@@ -17,19 +17,16 @@ const Top = () => {
             const res = await axios('https://hacker-news.firebaseio.com/v0/topstories.json?orderBy="$key"&limitToFirst=30');
             topArticlesId = [...res.data];
             // setNewArticlesId(res.data)
-            console.log(res.data);
+            // console.log(res.data);
             
             await Promise.all(
                         topArticlesId.map(async (id) => {
                             const response = await axios(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
                             topArticle = [response.data]
                             let topArticle1 = (Object.entries(topArticle));
-                            console.log(topArticle1[0][1].url);
-                            console.log(topArticle1[0][1].title)
                             let topArticleElTitle = topArticle1[0][1]
-                            // let topArticleElUrl = topArticle1[0][1].url
                              finalArticle.push(topArticleElTitle)
-                             console.log(finalArticle)
+                            //  console.log(finalArticle)
                             // setNewArticle(response.data)
                             ReactDOM.render(
                                 <ul>
@@ -38,7 +35,7 @@ const Top = () => {
                                 document.getElementById('top')
                             )
                             
-                            console.log(response.data);
+                            // console.log(response.data);
                         })
                     )
         } catch (error) {

@@ -24,8 +24,6 @@ const New = () => {
                             const response = await axios(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
                             newArticle = [response.data]
                             let newArticle1 = (Object.entries(newArticle));
-                            console.log(newArticle1[0][1].url);
-                            console.log(newArticle1[0][1].title)
                             let newArticleElTitle = newArticle1[0][1]
                             // let newArticleElUrl = newArticle1[0][1].url
                              finalArticle.push(newArticleElTitle)
@@ -38,7 +36,7 @@ const New = () => {
                                 document.getElementById('new')
                             )
                             
-                            console.log(response.data);
+                            // console.log(response.data);
                         })
                     )
         } catch (error) {
