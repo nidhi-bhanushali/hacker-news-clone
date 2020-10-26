@@ -123,6 +123,7 @@ img {
 
 .list li {
   padding-bottom: 0.3rem;
+  border-bottom: 1px solid #333333;
 }
 
 /* Padding */
