@@ -1,19 +1,7 @@
-import React , { useEffect } from 'react'
+import React , { useEffect , useState } from 'react'
 
 const NewArticles = ( {data} ) => {
-
-    const [isFetching, setIsFetching] = useState(false);
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-      }, []);
-
-      function handleScroll() {
-        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
-        setIsFetching(true);
-        console.log('Fetch more list items!');
-      }
+ 
 
     // console.log(data)
     return (

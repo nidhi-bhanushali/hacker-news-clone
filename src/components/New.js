@@ -9,10 +9,43 @@ const New = () => {
 
     let [newArticlesId , setNewArticlesId] =  useState([]);
     let [newArticle , setNewArticle] =  useState([]);
+    const [isFetching, setIsFetching] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      useEffect(() => {
+        if (!isFetching) return;
+        fetchMoreArticles();
+      }, [isFetching]);
+
+      function handleScroll() {
+        const {scrollTop , scrollHeight , clientHeight} = 
+        document.documentElement;
+    
+        if(scrollTop + clientHeight >= scrollHeight - 5){
+            setIsFetching(true);
+            console.log('fetching...');
+        }
+      }
+
+      function fetchMoreArticles() {
+        setTimeout(() => {
+            setIsFetching(false);
+            console.log('Not fetching...');
+            setTimeout(() => {
+                console.log("Fetched!")
+            },300);
+         } , 1000)
+        //   setNewArticlesId(prevState => ([...prevState, ...Array.from(Array(20).keys(), n => n + prevState.length + 1)]));
+  }
+
 
     useEffect(() => {
         let finalArticle = []
-        const fetchNewArticlesId = async () => {
+        var fetchNewArticlesId = async () => {
         try {
             const res = await axios('https://hacker-news.firebaseio.com/v0/newstories.json?orderBy="$key"&limitToFirst=30');
             newArticlesId = [...res.data];
@@ -27,7 +60,7 @@ const New = () => {
                             let newArticleElTitle = newArticle1[0][1]
                             // let newArticleElUrl = newArticle1[0][1].url
                              finalArticle.push(newArticleElTitle)
-                             console.log(finalArticle)
+                            //  console.log(finalArticle)
                             // setNewArticle(response.data)
                             ReactDOM.render(
                                 <ul>
@@ -46,6 +79,8 @@ const New = () => {
     };
         fetchNewArticlesId();
     }, []);
+
+
 
     
 
