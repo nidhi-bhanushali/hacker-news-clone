@@ -36,7 +36,8 @@ const New = () => {
             setIsFetching(false);
             console.log('Not fetching...');
             setTimeout(() => {
-                console.log("Fetched!")
+                fetchNewArticlesId();
+                console.log('Fetched!')
             },300);
          } , 1000)
         //   setNewArticlesId(prevState => ([...prevState, ...Array.from(Array(20).keys(), n => n + prevState.length + 1)]));
@@ -44,12 +45,16 @@ const New = () => {
 
 
     useEffect(() => {
-        let finalArticle = []
+        
+        fetchNewArticlesId();
+    }, []);
+
+    let finalArticle = []
         var fetchNewArticlesId = async () => {
         try {
-            const res = await axios('https://hacker-news.firebaseio.com/v0/newstories.json?orderBy="$key"&limitToFirst=30');
+            const res = await axios('https://hacker-news.firebaseio.com/v0/newstories.json');
             newArticlesId = [...res.data];
-            // setNewArticlesId(res.data)
+            setNewArticlesId(res.data)
             console.log(res.data);
             
             await Promise.all(
@@ -61,7 +66,7 @@ const New = () => {
                             // let newArticleElUrl = newArticle1[0][1].url
                              finalArticle.push(newArticleElTitle)
                             //  console.log(finalArticle)
-                            // setNewArticle(response.data)
+                            setNewArticle(response.data)
                             ReactDOM.render(
                                 <ul>
                                     <NewArticles data = {finalArticle}/>
@@ -76,13 +81,7 @@ const New = () => {
             console.log(error);
         } 
            
-    };
-        fetchNewArticlesId();
-    }, []);
-
-
-
-    
+    }; 
 
     return (
         <div className = 'container' id = 'new'>

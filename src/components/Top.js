@@ -9,14 +9,51 @@ const Top = () => {
 
     let [topArticlesId , setTopArticlesId] =  useState([]);
     let [topArticle , setTopArticle] =  useState([]);
+    const [isFetching, setIsFetching] = useState(false);
 
     useEffect(() => {
-        let finalArticle = []
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      useEffect(() => {
+        if (!isFetching) return;
+        fetchMoreArticles();
+      }, [isFetching]);
+
+      function handleScroll() {
+        const {scrollTop , scrollHeight , clientHeight} = 
+        document.documentElement;
+    
+        if(scrollTop + clientHeight >= scrollHeight - 5){
+            setIsFetching(true);
+            console.log('fetching...');
+        }
+      }
+
+      function fetchMoreArticles() {
+        setTimeout(() => {
+            setIsFetching(false);
+            console.log('Not fetching...');
+            setTimeout(() => {
+                fetchTopArticlesId();
+                console.log('Fetched!')
+            },300);
+         } , 1000)
+        //   setNewArticlesId(prevState => ([...prevState, ...Array.from(Array(20).keys(), n => n + prevState.length + 1)]));
+  }
+
+    useEffect(() => {
+        
+        fetchTopArticlesId();
+    }, []);
+
+    let finalArticle = []
         const fetchTopArticlesId = async () => {
         try {
-            const res = await axios('https://hacker-news.firebaseio.com/v0/topstories.json?orderBy="$key"&limitToFirst=30');
+            const res = await axios('https://hacker-news.firebaseio.com/v0/topstories.json');
             topArticlesId = [...res.data];
-            // setNewArticlesId(res.data)
+            setTopArticlesId(res.data)
             // console.log(res.data);
             
             await Promise.all(
@@ -27,7 +64,7 @@ const Top = () => {
                             let topArticleElTitle = topArticle1[0][1]
                              finalArticle.push(topArticleElTitle)
                             //  console.log(finalArticle)
-                            // setNewArticle(response.data)
+                            setTopArticle(response.data)
                             ReactDOM.render(
                                 <ul>
                                     <TopArticles data = {finalArticle}/>
@@ -43,8 +80,6 @@ const Top = () => {
         } 
            
     };
-        fetchTopArticlesId();
-    }, []);
 
     
 

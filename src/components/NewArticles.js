@@ -1,9 +1,9 @@
-import React , { useEffect , useState } from 'react'
+import React from 'react'
 
 const NewArticles = ( {data} ) => {
  
 
-    // console.log(data)
+     //console.log(data)
     return (
         <div>
             <ul className="list">
