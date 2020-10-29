@@ -9,39 +9,18 @@ const Top = () => {
 
     let [topArticlesId , setTopArticlesId] =  useState([]);
     let [topArticle , setTopArticle] =  useState([]);
-    const [isFetching, setIsFetching] = useState(false);
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-      }, []);
-
-      useEffect(() => {
-        if (!isFetching) return;
-        fetchMoreArticles();
-      }, [isFetching]);
-
-      function handleScroll() {
-        const {scrollTop , scrollHeight , clientHeight} = 
-        document.documentElement;
-    
-        if(scrollTop + clientHeight >= scrollHeight - 5){
-            setIsFetching(true);
-            console.log('fetching...');
-        }
-      }
-
-      function fetchMoreArticles() {
-        setTimeout(() => {
-            setIsFetching(false);
-            console.log('Not fetching...');
-            setTimeout(() => {
-                fetchTopArticlesId();
-                console.log('Fetched!')
-            },300);
-         } , 1000)
+    //   function fetchMoreArticles() {
+    //     setTimeout(() => {
+    //         setIsFetching(false);
+    //         console.log('Not fetching...');
+    //         setTimeout(() => {
+    //             fetchTopArticlesId();
+    //             console.log('Fetched!')
+    //         },300);
+    //      } , 1000)
         //   setNewArticlesId(prevState => ([...prevState, ...Array.from(Array(20).keys(), n => n + prevState.length + 1)]));
-  }
+//   }
 
     useEffect(() => {
         
@@ -51,7 +30,7 @@ const Top = () => {
     let finalArticle = []
         const fetchTopArticlesId = async () => {
         try {
-            const res = await axios('https://hacker-news.firebaseio.com/v0/topstories.json');
+            const res = await axios('https://hacker-news.firebaseio.com/v0/topstories.json?orderBy="$key"&limitToFirst=30');
             topArticlesId = [...res.data];
             setTopArticlesId(res.data)
             // console.log(res.data);
@@ -88,7 +67,7 @@ const Top = () => {
             
         </div>
     )
-}
+    }
 
 export default Top
 

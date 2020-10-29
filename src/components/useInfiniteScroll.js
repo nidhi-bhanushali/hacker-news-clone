@@ -1,37 +1,39 @@
-// import React , {useEffect , useState} from 'react'
+import React , {useEffect , useState} from 'react'
+import {MAX_STORIES , MORE_STORIES} from '../constants'
 
-// const useInfiniteScroll = (callback) => {
-//     const [isFetching, setIsFetching] = useState(false);
+export const useInfiniteScroll = () => {
+    const [isFetching, setIsFetching] = useState(false);
+    const [count , setCount] = useState(MORE_STORIES);
 
-//     useEffect(() => {
-//         window.addEventListener('scroll', handleScroll);
-//         return () => window.removeEventListener('scroll', handleScroll);
-//       }, []);
 
-//       useEffect(() => {
-//         if (!isFetching) return;
-//         callback(() => {
-//           console.log('called back');
-//         });
-//       }, [isFetching]);
-
-//       function handleScroll() {
-//         const {scrollTop , scrollHeight , clientHeight} = 
-//         document.documentElement;
+      function handleScroll() {
+        const {scrollTop , scrollHeight , clientHeight} = 
+        document.documentElement;
     
-//         if(scrollTop + clientHeight >= scrollHeight - 5){
-//             setIsFetching(true);
-//             console.log('fetching...');
-//         }
-//       }
+        if(scrollTop + clientHeight >= scrollHeight - 5){
+            setIsFetching(true);
+            console.log('fetching...');
+        }
+      }
 
-     
-  
-//     return (
-//         <div>
-            
-//         </div>
-//     )
-// }
+      useEffect(() => {
+        if (!isFetching) return;
+        
+        if (count + MORE_STORIES >= MAX_STORIES){
+            setCount(MAX_STORIES)
+        }else{
+            setCount(count + MORE_STORIES);
+        }
 
-// export default useInfiniteScroll;
+        setIsFetching(false);
+      }, [isFetching]);
+
+      useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []); 
+
+    return { count }
+}
+
+
