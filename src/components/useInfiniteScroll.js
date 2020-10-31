@@ -1,12 +1,13 @@
 import React , {useEffect , useState} from 'react'
 import {MAX_STORIES , MORE_STORIES} from '../constants'
+import { debounce } from '../debounce/debounce';
 
 export const useInfiniteScroll = () => {
     const [isFetching, setIsFetching] = useState(false);
     const [count , setCount] = useState(MORE_STORIES);
 
 
-      function handleScroll() {
+      const handleScroll = debounce(() => {
         const {scrollTop , scrollHeight , clientHeight} = 
         document.documentElement;
     
@@ -14,7 +15,7 @@ export const useInfiniteScroll = () => {
             setIsFetching(true);
             console.log('fetching...');
         }
-      }
+      },500);
 
       useEffect(() => {
         if (!isFetching) return;

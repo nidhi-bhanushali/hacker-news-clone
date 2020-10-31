@@ -2,7 +2,6 @@ import { getNewArticles, getNewStoriesIds } from './apis'
 import React , { useState , useEffect , memo} from 'react'
 import NewArticles from './NewArticles';
 import { useInfiniteScroll } from './useInfiniteScroll';
-// import Top from './Top';
 
 //  react-hooks/exhaustive-deps
 const New = () => {
@@ -16,10 +15,11 @@ const New = () => {
         getNewStoriesIds()
         .then(data => data && setNewArticlesId(data.data));
          // eslint-disable-next-line
-    }, []);
+    }, [count]);
 
    
-       return newArticlesId.map(item => <NewArticles item = {item} key = {item}/>)
+       return newArticlesId.slice(0,count)
+       .map(item => <NewArticles item = {item} key = {item}/>)
 };
 
 export default New
