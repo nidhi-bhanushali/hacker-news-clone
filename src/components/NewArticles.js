@@ -1,21 +1,17 @@
-import React from 'react'
+import React , {useEffect , useState} from 'react'
+import { getNewArticles } from './apis';
 
-const NewArticles = ( {data} ) => {
- 
-
-     //console.log(data)
+const NewArticles = ({item}) => {
+    const [newArticle , setNewArticle] = useState([]);
+    useEffect(() => {
+        getNewArticles(item).then(data=> data && data.url && setNewArticle(data));    
+    }, [])
     return (
-        <div>
-            <ul className="list">
-                {data.map(item => (
-                   <div className = 'card'>
-                       <h4><a href = {item.url}>{item.title}</a></h4>
-                       <p className = "dark-color">{item.score} points by <span className = 'dark-color'>{item.by} | </span>
-                       <span className = 'dark-color'>{item.descendants} </span>comments</p>
+           <div className = 'card'>
+                       <h4><a href = {newArticle.url}>{newArticle.title}</a></h4>
+                       <p className = "dark-color">{newArticle.score} points by <span className = 'dark-color'>{newArticle.by} | </span>
+                       <span className = 'dark-color'>{newArticle.descendants} </span>comments</p>
                    </div>
-                ))}
-            </ul>
-        </div>
     )
 }
 
