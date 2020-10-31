@@ -1,5 +1,5 @@
-import { getNewArticles, getNewStoriesIds } from './apis'
-import React , { useState , useEffect , memo} from 'react'
+import { getNewStoriesIds } from './apis'
+import React , { useState , useEffect } from 'react'
 import NewArticles from './NewArticles';
 import { useInfiniteScroll } from './useInfiniteScroll';
 

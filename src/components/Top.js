@@ -1,5 +1,5 @@
 import { getTopStoriesIds } from './apis'
-import React , { useState , useEffect , memo} from 'react'
+import React , { useState , useEffect } from 'react'
 import TopArticles from './TopArticles';
 import { useInfiniteScroll } from './useInfiniteScroll';
 

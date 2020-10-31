@@ -1,4 +1,4 @@
-import React , {useEffect , useState} from 'react'
+import  {useEffect , useState} from 'react'
 import {MAX_STORIES , MORE_STORIES} from '../constants'
 import { debounce } from '../debounce/debounce';
 
@@ -27,11 +27,13 @@ export const useInfiniteScroll = () => {
         }
 
         setIsFetching(false);
+        // eslint-disable-next-line
       }, [isFetching]);
 
       useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
+        // eslint-disable-next-line
       }, []); 
 
     return { count }
