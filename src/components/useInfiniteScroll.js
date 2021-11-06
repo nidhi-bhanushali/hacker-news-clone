@@ -13,7 +13,6 @@ export const useInfiniteScroll = () => {
     
         if(scrollTop + clientHeight >= scrollHeight - 5){
             setIsFetching(true);
-            console.log('fetching...');
         }
       },500);
 

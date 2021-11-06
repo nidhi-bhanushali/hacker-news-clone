@@ -11,7 +11,6 @@ const New = () => {
     const {count} = useInfiniteScroll()
 
       useEffect(() => {
-        console.log(count); 
         getNewStoriesIds()
         .then(data => data && setNewArticlesId(data.data));
          // eslint-disable-next-line

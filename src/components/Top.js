@@ -5,15 +5,13 @@ import { useInfiniteScroll } from './useInfiniteScroll';
 
 //  react-hooks/exhaustive-deps
 const Top = () => {
-
-    let [topArticlesId , setTopArticlesId] =  useState([]);
-    // let [TopArticle , setTopArticle] =  useState([]);
+    const [topArticlesId , setTopArticlesId] =  useState([]);
     const {count} = useInfiniteScroll()
 
       useEffect(() => {
-        console.log(count); 
         getTopStoriesIds()
         .then(data => data && setTopArticlesId(data.data));
+        
          // eslint-disable-next-line
     }, [count]);
 

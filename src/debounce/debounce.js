@@ -6,7 +6,6 @@ export const debounce = (func, delay) => {
         clearTimeout(timer);
         timer = setTimeout(()=>{
             func.apply(context,args);
-            console.log('hello')
         } ,delay );
     }
 }
