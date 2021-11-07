@@ -1,6 +1,7 @@
 import React , {useEffect , useState} from 'react'
 import Spinner from '../layout/Spinner';
 import { getTopArticles } from './apis';
+import { addToLocalStorage } from '../constants';
 
 const TopArticles = ({item}) => {
     const [topArticle , setTopArticle] = useState([]);
@@ -14,8 +15,11 @@ const TopArticles = ({item}) => {
             !loading ? 
            <div className = 'card'>
                        <h4><a href = {topArticle.url} target = "_blank" rel="noopener noreferrer">{topArticle.title}</a></h4>
+                       <div className='flex'>
                        <p className = "dark-color">{topArticle.score} points by <span className = 'dark-color'>{topArticle.by} | </span>
                        <span className = 'dark-color'>{topArticle.descendants} </span>comments</p>
+                       <button className='btn btn-sm btn-primary'  value={topArticle.id} onClick={addToLocalStorage}>Save</button>
+                       </div>
             </div> : <Spinner/>
     )
 }

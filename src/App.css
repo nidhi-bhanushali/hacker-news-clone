@@ -197,6 +197,11 @@ img {
   grid-gap: 1rem;
 }
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
 .btn {
   display: inline-block;
   background: var(--light-color);
