@@ -2,8 +2,10 @@ import React , {useEffect , useState} from 'react'
 import Spinner from '../layout/Spinner';
 import { getTopArticles } from './apis';
 import { addToLocalStorage } from '../constants';
+import { useHistory } from 'react-router';
 
 const TopArticles = ({item}) => {
+    const { location } = useHistory();
     const [topArticle , setTopArticle] = useState([]);
     const [loading, setLoading] = useState(false)
     useEffect(() => {
@@ -18,7 +20,7 @@ const TopArticles = ({item}) => {
                        <div className='flex'>
                        <p className = "dark-color">{topArticle.score} points by <span className = 'dark-color'>{topArticle.by} | </span>
                        <span className = 'dark-color'>{topArticle.descendants} </span>comments</p>
-                       <button className='btn btn-sm btn-primary'  value={topArticle.id} onClick={addToLocalStorage}>Save</button>
+                       {(location.pathname === '/saved') ? <></>:<button className='btn btn-sm btn-primary'  value={topArticle.id} onClick={addToLocalStorage}>Save</button>}
                        </div>
             </div> : <Spinner/>
     )

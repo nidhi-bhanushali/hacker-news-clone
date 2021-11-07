@@ -1,23 +1,23 @@
 import { getTopStoriesIds } from './apis'
 import React , { useState , useEffect } from 'react'
-import TopArticles from './TopArticles';
+import Articles from './Articles';
 import { useInfiniteScroll } from './useInfiniteScroll';
 
 //  react-hooks/exhaustive-deps
 const Top = () => {
-    const [topArticlesId , setTopArticlesId] =  useState([]);
+    const [ArticlesId , setArticlesId] =  useState([]);
     const {count} = useInfiniteScroll()
 
       useEffect(() => {
         getTopStoriesIds()
-        .then(data => data && setTopArticlesId(data.data));
+        .then(data => data && setArticlesId(data.data));
         
          // eslint-disable-next-line
     }, [count]);
 
    
-       return topArticlesId.slice(0,count)
-       .map(item => <TopArticles item = {item} key = {item}/>)
+       return ArticlesId.slice(0,count)
+       .map(item => <Articles item = {item} key = {item}/>)
 };
 
 export default Top

@@ -1,6 +1,6 @@
 import { getNewStoriesIds } from './apis'
 import React , { useState , useEffect } from 'react'
-import NewArticles from './NewArticles';
+import Articles from './Articles';
 import { useInfiniteScroll } from './useInfiniteScroll';
 
 //  react-hooks/exhaustive-deps
@@ -18,7 +18,7 @@ const New = () => {
 
    
        return newArticlesId.slice(0,count)
-       .map(item => <NewArticles item = {item} key = {item}/>)
+       .map(item => <Articles item = {item} key = {item}/>)
 };
 
 export default New

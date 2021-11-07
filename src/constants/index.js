@@ -7,3 +7,8 @@ export const addToLocalStorage = (e) => {
     existing.push(e.target.value);
     window.localStorage.setItem('savedItems',existing.toString())
 }
+export const getFromLocalStorage = () => {
+    let existingNews = localStorage.getItem('savedItems');
+    existingNews = existingNews ? existingNews.split(',') : []
+    return existingNews
+}
